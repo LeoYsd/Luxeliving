@@ -1,0 +1,31 @@
+Warning: validateDOMNesting(...): <a> cannot appear as a descendant of &lt;a&gt;.
+    at a
+    at a
+    at https://195598ea-10d0-4ea9-9d2d-53f04b537ae0-00-3n7h01fib0gpc.picard.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/wouter.js?v=fd3ead19:337:18
+    at div
+    at div
+    at header
+    at Header (https://195598ea-10d0-4ea9-9d2d-53f04b537ae0-00-3n7h01fib0gpc.picard.replit.dev/src/components/Header.tsx:33:26)
+    at div
+    at Provider (https://195598ea-10d0-4ea9-9d2d-53f04b537ae0-00-3n7h01fib0gpc.picard.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-NW7KKCUG.js?v=fd3ead19:32:15)
+    at TooltipProvider (https://195598ea-10d0-4ea9-9d2d-53f04b537ae0-00-3n7h01fib0gpc.picard.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/@radix-ui_react-tooltip.js?v=fd3ead19:59:5)
+    at AuthProvider (https://195598ea-10d0-4ea9-9d2d-53f04b537ae0-00-3n7h01fib0gpc.picard.replit.dev/src/hooks/use-auth.tsx:26:32)
+    at QueryClientProvider (https://195598ea-10d0-4ea9-9d2d-53f04b537ae0-00-3n7h01fib0gpc.picard.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/@tanstack_react-query.js?v=fd3ead19:2805:3)
+    at App (https://195598ea-10d0-4ea9-9d2d-53f04b537ae0-00-3n7h01fib0gpc.picard.replit.dev/src/App.tsx?v=eLX9Gv24aYKDkhJ2B1gtU:103:39)
+at a
+at a
+at https://195598ea-10d0-4ea9-9d2d-53f04b537ae0-00-3n7h01fib0gpc.picard.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/wouter.js?v=fd3ead19:337:18
+at div
+at div
+at header
+at Header (https://195598ea-10d0-4ea9-9d2d-53f04b537ae0-00-3n7h01fib0gpc.picard.replit.dev/src/components/Header.tsx:33:26)
+at div
+at Provider (https://195598ea-10d0-4ea9-9d2d-53f04b537ae0-00-3n7h01fib0gpc.picard.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-NW7KKCUG.js?v=fd3ead19:32:15)
+at TooltipProvider (https://195598ea-10d0-4ea9-9d2d-53f04b537ae0-00-3n7h01fib0gpc.picard.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/@radix-ui_react-tooltip.js?v=fd3ead19:59:5)
+at AuthProvider (https://195598ea-10d0-4ea9-9d2d-53f04b537ae0-00-3n7h01fib0gpc.picard.replit.dev/src/hooks/use-auth.tsx:26:32)
+at QueryClientProvider (https://195598ea-10d0-4ea9-9d2d-53f04b537ae0-00-3n7h01fib0gpc.picard.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/@tanstack_react-query.js?v=fd3ead19:2805:3)
+at App (https://195598ea-10d0-4ea9-9d2d-53f04b537ae0-00-3n7h01fib0gpc.picard.replit.dev/src/App.tsx?v=eLX9Gv24aYKDkhJ2B1gtU:103:39)
+at t.value (https://195598ea-10d0-4ea9-9d2d-53f04b537ae0-00-3n7h01fib0gpc.picard.replit.dev/__replco/static/devtools/eruda/3.2.3/eruda.js:2:17465)
+at new t (https://195598ea-10d0-4ea9-9d2d-53f04b537ae0-00-3n7h01fib0gpc.picard.replit.dev/__replco/static/devtools/eruda/3.2.3/eruda.js:2:12630)
+at t.value (https://195598ea-10d0-4ea9-9d2d-53f04b537ae0-00-3n7h01fib0gpc.picard.replit.dev/__replco/static/devtools/eruda/3.2.3/eruda.js:2:32766)
+at https://195598ea-10d0-4ea9-9d2d-53f04b537ae0-00-3n7h01fib0gpc.picard.replit.dev/__replco/static/

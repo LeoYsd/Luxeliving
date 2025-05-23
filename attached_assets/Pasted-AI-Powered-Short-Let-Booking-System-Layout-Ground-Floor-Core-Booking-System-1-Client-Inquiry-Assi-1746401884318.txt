@@ -1,0 +1,99 @@
+AI-Powered Short-Let Booking System Layout
+Ground Floor – Core Booking System
+1. Client Inquiry Assistant (Chatbot)
+Channels: WhatsApp (via API), Instagram DMs, TikTok (via Link-in-bio tools), Website
+
+Functions:
+
+Collects client details: Date, Location, Number of Rooms, Budget, Referral Code
+
+Responds instantly, 24/7
+
+Logs inquiries into a centralized database
+
+2. Booking Backend
+Tools: Google Sheets, Notion, Airtable
+
+Functions:
+
+Stores apartment listings uploaded by you or your team
+
+AI queries this backend to match listings with client requests
+
+3. Referral Code System
+Mechanism:
+
+Each agent is assigned a unique referral code (e.g., AGT001)
+
+Clients include this code in their inquiries
+
+System tracks referrals and calculates commissions accordingly
+
+First Floor – Automation & CRM
+4. Auto Follow-Up System
+Functions:
+
+Sends follow-up messages to clients after a set period (e.g., 6 or 12 hours)
+
+Provides reminders or alternative options
+
+Includes multimedia content like pictures or videos of apartments
+
+5. Group Bot & Broadcast Assistant
+Platforms: WhatsApp Groups, Broadcast Lists
+
+Functions:
+
+Posts periodic updates (e.g., new apartment listings)
+
+Answers basic questions automatically via WhatsApp Business API
+
+6. Client CRM Integration
+Tools: Notion CRM, Airtable, GoHighLevel
+
+Functions:
+
+Maintains records of client interactions and preferences
+
+Sends personalized messages (e.g., birthday discounts, booking reminders)
+
+Second Floor – Content & Marketing Engine
+7. Social Media Content Assistant
+Tools: Canva, ChatGPT, CapCut, TikTok Scheduler
+
+Functions:
+
+Generates engaging captions and content for social media
+
+Suggests trending hashtags and TikTok sounds
+
+Schedules and repurposes posts across platforms
+
+Creates voiceovers or scripts for apartment walkthrough videos
+
+Roof – Agent Dashboard & Analytics
+8. Agent Dashboard
+Tools: Softr, Glide (connected to Airtable)
+
+Functions:
+
+Allows agents to log in and track:
+
+Number of leads referred
+
+Bookings confirmed
+
+Commissions earned
+
+Provides monthly or weekly reports for payouts
+
+🧰 Tools Stack Overview
+Feature	Tools Used
+Chatbot & AI	ChatGPT + WhatsApp API (Twilio/360dialog)
+Booking Data Storage	Google Sheets / Airtable / Notion
+Form Collection	Google Forms / Typeform
+Automations	Zapier / Make (Integromat)
+Content Marketing	Canva + CapCut + ChatGPT
+Agent Dashboard	Glide / Softr
+Notifications	WhatsApp API / Email Bots
+
