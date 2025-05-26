@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/input";
 import { getChatbotResponse } from "@/lib/openai";
 import { Property } from "@shared/schema";
 import { Loader2, Bot, User, Home, MapPin, X, ArrowRight, Send } from "lucide-react";
+import { Card } from "@/components/ui/card";
 
 interface Message {
   id: string;
@@ -248,212 +249,172 @@ export default function ChatBot() {
       
       // Basic bot response
       const botMessage: Message = {
-        id: (Date.now() + 1).toString(),
+        id: (Date.now() + 2).toString(),
         type: 'bot',
-        text: response.reply,
+        text: response.reply || "I'm sorry, I couldn't process your request.",
         timestamp: new Date(),
         contentType: 'text'
       };
       
-      // Send basic text response
-      setTimeout(() => {
-        setMessages((prev) => [...prev, botMessage]);
-        setIsTyping(false);
-        
-        // For property search, follow up with property recommendations
-        if (intent === 'find-property') {
-          setIsTyping(true);
-          setTimeout(() => {
-            handlePropertyRecommendation(text);
-            setIsTyping(false);
-          }, 1000);
-        }
-        // For availability check, show the form
-        else if (intent === 'check-availability') {
-          setIsTyping(true);
-          setTimeout(() => {
-            showAvailabilityForm();
-            setIsTyping(false);
-          }, 1000);
-        }
-        // For referral code, show the form
-        else if (intent === 'referral-code') {
-          setIsTyping(true);
-          setTimeout(() => {
-            showReferralCodeForm();
-            setIsTyping(false);
-          }, 1000);
-        }
-      }, 1000);
+      setMessages((prev) => [...prev, botMessage]);
+      setIsTyping(false);
+
     } catch (error) {
-      console.error('Error sending message to chatbot:', error);
-      
-      setTimeout(() => {
-        const errorMessage: Message = {
-          id: (Date.now() + 1).toString(),
-          type: 'bot',
-          text: "I'm sorry, I'm having trouble connecting to my brain right now. Please try again later.",
-          timestamp: new Date(),
-          contentType: 'text'
-        };
-        
-        setMessages((prev) => [...prev, errorMessage]);
-        setIsTyping(false);
-      }, 1000);
+      console.error('Error getting chatbot response:', error);
+      setIsTyping(false);
+
+      const errorMessage: Message = {
+        id: (Date.now() + 2).toString(), // Unique ID
+        type: 'bot',
+        text: "I'm having trouble connecting right now. Please try again later.",
+        timestamp: new Date(),
+        contentType: 'text'
+      };
+
+      setMessages((prev) => [...prev, errorMessage]);
     }
   };
 
+  const handleQuickReplyClick = (reply: string) => {
+    handleSendMessage(reply);
+  };
+
   const formatTime = (date: Date) => {
-    return date.toLocaleTimeString('en-US', {
-      hour: 'numeric',
-      minute: '2-digit',
-      hour12: true
-    });
+    return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
   };
 
   return (
-    <div className="fixed bottom-4 right-4 z-50 w-full max-w-md">
-      <div className="bg-white rounded-lg shadow-xl overflow-hidden flex flex-col h-96 sm:h-[32rem]">
-        <div className="bg-primary text-white p-4 flex justify-between items-center">
-          <div className="flex items-center">
-            <Bot className="h-5 w-5 mr-2" />
-            <h3 className="font-medium">Luxe Living AI Assistant</h3>
-          </div>
-          <button onClick={toggleChat} className="text-white hover:text-gray-200">
-            <X className="h-5 w-5" />
-          </button>
+    <div 
+      className="fixed bottom-4 right-4 z-50 w-full max-w-sm rounded-lg shadow-lg transition-transform duration-300 ease-in-out transform"
+      style={{ backgroundColor: '#183B4E' }}
+    >
+      {/* Chatbot Header */}
+      <div className="flex items-center justify-between p-4 border-b border-secondary-gold">
+        <div className="flex items-center space-x-2">
+          <Bot className="h-6 w-6 text-primary-gold" />
+          <h3 className="text-lg font-bold text-primary-gold">AI Booking Assistant</h3>
         </div>
-        
-        <div className="chat-container flex-1 overflow-y-auto p-4 space-y-4">
-          {messages.map((message) => (
-            <div key={message.id} className={`flex items-start ${message.type === 'user' ? 'justify-end' : ''}`}>
-              {message.type === 'bot' && (
-                <div className="w-8 h-8 rounded-full bg-primary-100 flex items-center justify-center mr-2 flex-shrink-0">
-                  <Bot className="h-4 w-4 text-primary" />
-                </div>
-              )}
-              <div className={`max-w-[80%] ${message.type === 'user' ? 'bg-primary text-white' : 'bg-gray-100 text-gray-900'} rounded-lg p-3`}>
-                <p className="text-sm">{message.text}</p>
-                {message.contentType === 'property-recommendations' && message.properties && (
-                  <div className="mt-3 space-y-2">
-                    {message.properties.map((property) => (
-                      <Link key={property.id} href={`/property/${property.id}`}>
-                        <div className="bg-white rounded-lg p-3 shadow-sm hover:shadow-md transition cursor-pointer">
-                          <h4 className="font-medium text-sm">{property.name}</h4>
-                          <p className="text-xs text-gray-600">{property.location}</p>
-                          <p className="text-xs text-primary mt-1">₦{property.pricePerNight.toLocaleString()} per night</p>
-                        </div>
-                      </Link>
+        <Button 
+          variant="ghost" 
+          size="icon" 
+          onClick={toggleChat}
+          className="text-primary-gold hover:bg-gray-700"
+        >
+          <X className="h-5 w-5" />
+        </Button>
+      </div>
+
+      {/* Chat Messages Area */}
+      <div className="p-4 h-80 overflow-y-auto space-y-4" style={{ scrollbarWidth: 'none' }}> {/* Hide scrollbar */}
+        {messages.map((message) => (
+          <div 
+            key={message.id} 
+            className={`flex ${message.type === 'user' ? 'justify-end' : 'justify-start'}`}
+          >
+            <div 
+              className={`max-w-[70%] p-3 rounded-lg 
+                ${message.type === 'user' 
+                  ? 'bg-primary-gold text-primary-black' 
+                  : 'bg-gray-700 text-secondary-gold'
+                }
+              `}
+            >
+              {message.contentType === 'property-recommendations' ? (
+                <div>
+                  <p className="mb-2 font-semibold">{message.text}</p>
+                  <div className="grid grid-cols-1 gap-3">
+                    {message.properties?.map(property => (
+                      <Card key={property.id} className="bg-gray-600 text-secondary-gold p-3 shadow">
+                        <h4 className="font-bold text-primary-gold mb-1 truncate">{property.name}</h4>
+                        <p className="text-sm mb-2">₦{property.pricePerNight.toLocaleString()}/night</p>
+                        <Link href={`/property/${property.id}`} className="text-primary-gold hover:underline text-sm">
+                          View Details <ArrowRight className="inline-block h-3 w-3 ml-1" />
+                        </Link>
+                      </Card>
                     ))}
                   </div>
-                )}
-                {message.contentType === 'referral-form' && (
-                  <div className="mt-3">
-                    <Input
-                      placeholder="Enter your referral code"
-                      className="w-full"
-                      onKeyPress={(e) => {
-                        if (e.key === 'Enter') {
-                          handleSendMessage(`I have a referral code: ${(e.target as HTMLInputElement).value}`);
-                        }
-                      }}
-                    />
-                  </div>
-                )}
-                {message.contentType === 'availability-check' && (
-                  <div className="mt-3 space-y-2">
-                    <Input
-                      type="date"
-                      className="w-full"
-                      onChange={(e) => {
-                        setChatState(prev => ({
-                          ...prev,
-                          preferredDates: {
-                            ...prev.preferredDates,
-                            checkIn: new Date(e.target.value)
-                          }
-                        }));
-                      }}
-                    />
-                    <Input
-                      type="date"
-                      className="w-full"
-                      onChange={(e) => {
-                        setChatState(prev => ({
-                          ...prev,
-                          preferredDates: {
-                            ...prev.preferredDates,
-                            checkOut: new Date(e.target.value)
-                          }
-                        }));
-                      }}
-                    />
-                    <Button
-                      className="w-full"
-                      onClick={() => {
-                        const { preferredDates } = chatState;
-                        if (preferredDates?.checkIn && preferredDates?.checkOut) {
-                          handleSendMessage(`I want to check availability from ${preferredDates.checkIn.toLocaleDateString()} to ${preferredDates.checkOut.toLocaleDateString()}`);
-                        }
-                      }}
-                    >
-                      Check Availability
-                    </Button>
-                  </div>
-                )}
-                <span className="text-xs opacity-75 mt-1 block">{formatTime(message.timestamp)}</span>
-              </div>
-              {message.type === 'user' && (
-                <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center ml-2 flex-shrink-0">
-                  <User className="h-4 w-4 text-white" />
                 </div>
+              ) : message.contentType === 'referral-form' ? (
+                <div>
+                  <p className="mb-2">{message.text}</p>
+                  {showReferralForm && (
+                    <div className="flex flex-col gap-2 mt-2">
+                      <Input 
+                        placeholder="Enter code" 
+                        className="bg-gray-600 text-secondary-gold border-gray-500 focus-visible:ring-primary-gold"
+                      />
+                      <Button variant="gold-black" className="w-full">Submit Code</Button>
+                    </div>
+                  )}
+                </div>
+              ) : message.contentType === 'availability-check' ? (
+                 <div>
+                  <p className="mb-2">{message.text}</p>
+                  {/* TODO: Implement availability check form */}
+                  <p className="text-sm italic">Availability check form goes here...</p>
+                 </div>
+              ) : (
+                <p>{message.text}</p>
               )}
+              <span className={`block mt-1 text-xs 
+                ${message.type === 'user' ? 'text-primary-black/70' : 'text-secondary-gold/70'}
+              `}>
+                {formatTime(message.timestamp)}
+              </span>
             </div>
-          ))}
-          {isTyping && (
-            <div className="flex items-start">
-              <div className="w-8 h-8 rounded-full bg-primary-100 flex items-center justify-center mr-2">
-                <Bot className="h-4 w-4 text-primary" />
-              </div>
-              <div className="bg-gray-100 rounded-lg p-3">
-                <Loader2 className="h-4 w-4 animate-spin text-primary" />
-              </div>
-            </div>
-          )}
-          <div ref={messagesEndRef} />
-        </div>
-        
-        <div className="p-4 border-t">
-          <div className="flex gap-2">
-            <Input
-              value={inputValue}
-              onChange={(e) => setInputValue(e.target.value)}
-              onKeyPress={(e) => {
-                if (e.key === 'Enter') {
-                  handleSendMessage(inputValue);
-                }
-              }}
-              placeholder="Type your message..."
-              className="flex-1"
-            />
-            <Button onClick={() => handleSendMessage(inputValue)}>
-              <Send className="h-4 w-4" />
+          </div>
+        ))}
+        {isTyping && (
+           <div className="flex justify-start">
+             <div className="max-w-[70%] p-3 rounded-lg bg-gray-700 text-secondary-gold">
+               <div className="flex items-center">
+                 <Loader2 className="h-4 w-4 animate-spin mr-2" />
+                 <span>Typing...</span>
+               </div>
+             </div>
+           </div>
+        )}
+        <div ref={messagesEndRef} />
+      </div>
+
+      {/* Quick Replies */}
+      {!isTyping && messages.length <= 1 && (
+        <div className="p-4 border-t border-secondary-gold flex flex-wrap gap-2">
+          {quickReplies.map((reply, index) => (
+            <Button 
+              key={index} 
+              variant="outline" 
+              size="sm" 
+              onClick={() => handleQuickReplyClick(reply)}
+              className="border-primary-gold text-primary-gold hover:bg-primary-gold hover:text-primary-black"
+            >
+              {reply}
             </Button>
-          </div>
-          <div className="flex gap-2 mt-2">
-            {quickReplies.map((reply) => (
-              <Button
-                key={reply}
-                variant="outline"
-                size="sm"
-                onClick={() => handleSendMessage(reply)}
-                className="flex-1"
-              >
-                {reply}
-              </Button>
-            ))}
-          </div>
+          ))}
         </div>
+      )}
+
+      {/* Chat Input Area */}
+      <div className="p-4 border-t border-secondary-gold flex items-center space-x-2">
+        <Input
+          className="flex-1 bg-gray-700 text-secondary-gold border-gray-600 focus-visible:ring-primary-gold"
+          placeholder="Type a message..."
+          value={inputValue}
+          onChange={(e) => setInputValue(e.target.value)}
+          onKeyPress={(e) => {
+            if (e.key === 'Enter') {
+              handleSendMessage(inputValue);
+            }
+          }}
+        />
+        <Button 
+          type="submit" 
+          size="icon" 
+          onClick={() => handleSendMessage(inputValue)}
+          className="bg-primary-gold text-primary-black hover:bg-secondary-gold"
+        >
+          <Send className="h-5 w-5" />
+        </Button>
       </div>
     </div>
   );
