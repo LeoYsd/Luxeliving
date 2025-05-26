@@ -19,32 +19,32 @@ export default function Header() {
   const isMobile = useIsMobile();
 
   return (
-    <header className="bg-white shadow fixed top-0 left-0 right-0 z-10">
-      <div className="container mx-auto px-4 py-3 flex items-center justify-between">
+    <header className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 w-[96%] max-w-screen-xl rounded-full bg-primary-black/80 px-8 py-3 shadow-lg backdrop-blur-sm">
+      <div className="container mx-auto flex items-center justify-between">
         <div className="flex items-center space-x-2">
           <Link href="/">
             <div className="flex items-center space-x-2 cursor-pointer">
-              <Building className="text-primary h-6 w-6" />
-              <h1 className="text-xl font-bold font-heading text-dark hidden md:block">Luxe Living</h1>
+              <Building className="text-primary-gold h-6 w-6" />
+              <h1 className="text-xl font-bold font-heading text-primary-gold hidden md:block">Luxe Living</h1>
             </div>
           </Link>
         </div>
         
         <nav className="hidden md:flex items-center space-x-6">
           <Link href="/">
-            <div className={`text-dark hover:text-primary font-medium cursor-pointer ${location === '/' ? 'text-primary' : ''}`}>Home</div>
+            <div className={`hover:text-secondary-gold font-medium cursor-pointer ${location === '/' ? 'text-primary-gold' : 'text-primary-gold'}`}>Home</div>
           </Link>
           <Link href="/properties">
-            <div className={`text-dark hover:text-primary font-medium cursor-pointer ${location === '/properties' ? 'text-primary' : ''}`}>Properties</div>
+            <div className={`hover:text-secondary-gold font-medium cursor-pointer ${location === '/properties' ? 'text-primary-gold' : 'text-primary-gold'}`}>Properties</div>
           </Link>
           <Link href="/start-booking">
-            <div className={`text-dark hover:text-primary font-medium cursor-pointer ${location === '/start-booking' ? 'text-primary' : ''}`}>Start Booking</div>
+            <div className={`hover:text-secondary-gold font-medium cursor-pointer ${location === '/start-booking' ? 'text-primary-gold' : 'text-primary-gold'}`}>Start Booking</div>
           </Link>
           <Link href="/#how-it-works">
-            <div className={`text-dark hover:text-primary font-medium cursor-pointer`}>How It Works</div>
+            <div className={`hover:text-secondary-gold font-medium cursor-pointer text-primary-gold`}>How It Works</div>
           </Link>
           <Link href="/#for-agents">
-            <div className={`text-dark hover:text-primary font-medium cursor-pointer`}>For Agents</div>
+            <div className={`hover:text-secondary-gold font-medium cursor-pointer text-primary-gold`}>For Agents</div>
           </Link>
         </nav>
         
@@ -56,7 +56,7 @@ export default function Header() {
               console.log('Chat button clicked');
               toggleChat();
             }} 
-            className="bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary/90 transition flex items-center"
+            className="bg-primary-gold text-primary-black px-6 py-2 rounded-full hover:bg-secondary-gold transition flex items-center"
           >
             <MessageSquare className="h-5 w-5 mr-2" />
             {!isMobile && <span>Chat with AI</span>}
@@ -65,10 +65,10 @@ export default function Header() {
           <DropdownMenu>
             <DropdownMenuTrigger className="focus:outline-none">
               <div className="flex items-center space-x-1">
-                <div className="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center">
-                  <User className="h-4 w-4 text-gray-500" />
+                <div className="w-8 h-8 bg-gray-700 rounded-full flex items-center justify-center">
+                  <User className="h-4 w-4 text-primary-gold" />
                 </div>
-                <ChevronDown className="h-4 w-4 text-gray-500" />
+                <ChevronDown className="h-4 w-4 text-primary-gold" />
               </div>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">

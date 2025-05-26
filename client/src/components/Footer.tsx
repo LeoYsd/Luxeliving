@@ -1,27 +1,27 @@
 export default function Footer() {
   return (
     <footer className="bg-dark text-white py-10">
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-4 text-sm">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div>
             <div className="flex items-center space-x-2 mb-4">
               <i className="fas fa-building text-primary-400 text-2xl"></i>
               <h2 className="text-xl font-bold">Luxe Living</h2>
             </div>
-            <p className="text-gray-400 mb-4">
+            <p className="text-gray-400 mb-4 text-sm">
               AI-powered short-let booking system for luxurious and convenient stays.
             </p>
             <div className="flex space-x-4">
-              <a href="#" className="text-gray-400 hover:text-white">
+              <a href="#" className="text-gray-400 hover:text-white text-sm">
                 <i className="fab fa-facebook-f"></i>
               </a>
-              <a href="#" className="text-gray-400 hover:text-white">
+              <a href="#" className="text-gray-400 hover:text-white text-sm">
                 <i className="fab fa-instagram"></i>
               </a>
-              <a href="#" className="text-gray-400 hover:text-white">
+              <a href="#" className="text-gray-400 hover:text-white text-sm">
                 <i className="fab fa-twitter"></i>
               </a>
-              <a href="#" className="text-gray-400 hover:text-white">
+              <a href="#" className="text-gray-400 hover:text-white text-sm">
                 <i className="fab fa-whatsapp"></i>
               </a>
             </div>
@@ -30,26 +30,26 @@ export default function Footer() {
           <div>
             <h3 className="font-bold text-lg mb-4">Quick Links</h3>
             <ul className="space-y-2">
-              <li><a href="/" className="text-gray-400 hover:text-white">Home</a></li>
-              <li><a href="/properties" className="text-gray-400 hover:text-white">Properties</a></li>
-              <li><a href="/#how-it-works" className="text-gray-400 hover:text-white">How It Works</a></li>
-              <li><a href="/#for-agents" className="text-gray-400 hover:text-white">Become an Agent</a></li>
+              <li><a href="/" className="text-gray-400 hover:text-white text-sm">Home</a></li>
+              <li><a href="/properties" className="text-gray-400 hover:text-white text-sm">Properties</a></li>
+              <li><a href="/#how-it-works" className="text-gray-400 hover:text-white text-sm">How It Works</a></li>
+              <li><a href="/#for-agents" className="text-gray-400 hover:text-white text-sm">Become an Agent</a></li>
             </ul>
           </div>
           
           <div>
             <h3 className="font-bold text-lg mb-4">Support</h3>
             <ul className="space-y-2">
-              <li><a href="#" className="text-gray-400 hover:text-white">Help Center</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-white">FAQs</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-white">Contact Us</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-white">Privacy Policy</a></li>
+              <li><a href="#" className="text-gray-400 hover:text-white text-sm">Help Center</a></li>
+              <li><a href="#" className="text-gray-400 hover:text-white text-sm">FAQs</a></li>
+              <li><a href="#" className="text-gray-400 hover:text-white text-sm">Contact Us</a></li>
+              <li><a href="#" className="text-gray-400 hover:text-white text-sm">Privacy Policy</a></li>
             </ul>
           </div>
           
           <div>
             <h3 className="font-bold text-lg mb-4">Contact</h3>
-            <ul className="space-y-2 text-gray-400">
+            <ul className="space-y-2 text-gray-400 text-sm">
               <li className="flex items-start">
                 <i className="fas fa-map-marker-alt mt-1 mr-2"></i>
                 <span>123 Victoria Island, Lagos, Nigeria</span>

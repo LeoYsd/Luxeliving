@@ -27,7 +27,7 @@ router.post("/webhook", async (req, res) => {
   if (text && from) {
     try {
       // Get AI response
-      const aiReply = await getChatbotReply(text);
+      const aiReply = await getChatbotReply(text, from);
       
       // Send reply via WhatsApp
       await sendWhatsAppMessage(from, aiReply);

@@ -9,11 +9,11 @@ export default function FeaturedProperties() {
 
   return (
     <section className="py-12 bg-light">
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-4 text-dark">
         <div className="flex justify-between items-center mb-8">
           <h2 className="text-2xl md:text-3xl font-bold font-heading text-dark">Featured Properties</h2>
-          <a href="/properties" className="text-primary hover:text-primary/90 font-medium flex items-center">
-            View all <i className="fas fa-arrow-right ml-2"></i>
+          <a href="/properties" className="text-primary-black hover:text-gray-700 font-medium flex items-center">
+            View all <i className="fas fa-arrow-right ml-2 text-primary-gold"></i>
           </a>
         </div>
 

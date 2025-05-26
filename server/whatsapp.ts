@@ -7,6 +7,11 @@ const OPENAI_API_KEY = process.env.OPENAI_API_KEY || "sk-dummy-key";
 // Log if we're using the API key or fallback
 console.log("OpenAI API Key Status:", OPENAI_API_KEY === "sk-dummy-key" ? "Using fallback responses" : "Using OpenAI API");
 
+// --- Temporary Debug Logging ---
+console.log("DEBUG: process.env.WHATSAPP_TOKEN =", process.env.WHATSAPP_TOKEN);
+console.log("DEBUG: process.env.WHATSAPP_PHONE_NUMBER_ID =", process.env.WHATSAPP_PHONE_NUMBER_ID);
+// --- End Temporary Debug Logging ---
+
 const openai = new OpenAI({
   apiKey: OPENAI_API_KEY,
 });
@@ -53,7 +58,7 @@ export async function getChatbotReply(message: string, from: string): Promise<st
         - Keep responses concise (2-3 sentences maximum)
         - Always ask for missing information (location, dates, guests, budget)
         - If asked about specific property details you don't know, suggest browsing the website
-        - For pricing questions, mention our range is ₦35,000 to ₦120,000 per night
+        - For pricing questions, mention our range is ₦35,000 to 120,000 per night
         - For booking, guide users to select dates and click 'Book Now'
         - If a referral code is mentioned, acknowledge it and ensure proper credit
         
@@ -153,7 +158,7 @@ function getLocalBotResponse(message: string): string {
     message.includes("expensive") || 
     message.includes("cheap")
   ) {
-    return "Our luxury properties range from ₦35,000 to ₦120,000 per night. What's your budget range so I can find the best options for you?";
+    return "Our luxury properties range from ₦35,000 to 120,000 per night. What's your budget range so I can find the best options for you?";
   } else if (
     message.includes("book") || 
     message.includes("reserve") || 
