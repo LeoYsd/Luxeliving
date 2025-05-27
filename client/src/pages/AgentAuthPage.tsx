@@ -69,7 +69,7 @@ export default function AgentAuthPage() {
     try {
       const user = await login(data.username, data.password);
       if (user) {
-        window.location.href = "/agent";
+        navigate("/agent");
       }
     } catch (error) {
       console.error("Login error:", error);
@@ -111,7 +111,7 @@ export default function AgentAuthPage() {
           throw new Error('Failed to create agent record');
         }
 
-        window.location.href = "/agent";
+        navigate("/agent");
       }
     } catch (error) {
       console.error("Registration error:", error);

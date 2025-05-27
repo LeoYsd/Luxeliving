@@ -285,11 +285,10 @@ export default function ChatBot() {
 
   return (
     <div 
-      className="fixed bottom-4 right-4 z-50 w-full max-w-sm rounded-lg shadow-lg transition-transform duration-300 ease-in-out transform"
-      style={{ backgroundColor: '#183B4E' }}
+      className="fixed bottom-4 right-4 z-50 w-full max-w-sm rounded-lg shadow-lg transition-transform duration-300 ease-in-out transform bg-white"
     >
       {/* Chatbot Header */}
-      <div className="flex items-center justify-between p-4 border-b border-secondary-gold">
+      <div className="flex items-center justify-between p-4 border-b border-gray-300" style={{ backgroundColor: '#183B4E' }}>
         <div className="flex items-center space-x-2">
           <Bot className="h-6 w-6 text-primary-gold" />
           <h3 className="text-lg font-bold text-primary-gold">AI Booking Assistant</h3>
@@ -305,7 +304,7 @@ export default function ChatBot() {
       </div>
 
       {/* Chat Messages Area */}
-      <div className="p-4 h-80 overflow-y-auto space-y-4" style={{ scrollbarWidth: 'none' }}> {/* Hide scrollbar */}
+      <div className="p-4 h-80 overflow-y-auto space-y-4" style={{ scrollbarWidth: 'none' }}>
         {messages.map((message) => (
           <div 
             key={message.id} 
@@ -315,18 +314,18 @@ export default function ChatBot() {
               className={`max-w-[70%] p-3 rounded-lg 
                 ${message.type === 'user' 
                   ? 'bg-primary-gold text-primary-black' 
-                  : 'bg-gray-700 text-secondary-gold'
+                  : 'bg-gray-200 text-gray-800'
                 }
               `}
             >
               {message.contentType === 'property-recommendations' ? (
                 <div>
-                  <p className="mb-2 font-semibold">{message.text}</p>
+                  <p className="mb-2 font-semibold text-gray-800">{message.text}</p>
                   <div className="grid grid-cols-1 gap-3">
                     {message.properties?.map(property => (
-                      <Card key={property.id} className="bg-gray-600 text-secondary-gold p-3 shadow">
+                      <Card key={property.id} className="bg-white text-gray-800 p-3 shadow">
                         <h4 className="font-bold text-primary-gold mb-1 truncate">{property.name}</h4>
-                        <p className="text-sm mb-2">₦{property.pricePerNight.toLocaleString()}/night</p>
+                        <p className="text-sm mb-2 text-gray-600">₦{property.pricePerNight.toLocaleString()}/night</p>
                         <Link href={`/property/${property.id}`} className="text-primary-gold hover:underline text-sm">
                           View Details <ArrowRight className="inline-block h-3 w-3 ml-1" />
                         </Link>
@@ -336,12 +335,12 @@ export default function ChatBot() {
                 </div>
               ) : message.contentType === 'referral-form' ? (
                 <div>
-                  <p className="mb-2">{message.text}</p>
+                  <p className="mb-2 text-gray-800">{message.text}</p>
                   {showReferralForm && (
                     <div className="flex flex-col gap-2 mt-2">
                       <Input 
                         placeholder="Enter code" 
-                        className="bg-gray-600 text-secondary-gold border-gray-500 focus-visible:ring-primary-gold"
+                        className="bg-white text-gray-800 border-gray-300 focus-visible:ring-primary-gold"
                       />
                       <Button variant="gold-black" className="w-full">Submit Code</Button>
                     </div>
@@ -349,15 +348,14 @@ export default function ChatBot() {
                 </div>
               ) : message.contentType === 'availability-check' ? (
                  <div>
-                  <p className="mb-2">{message.text}</p>
-                  {/* TODO: Implement availability check form */}
-                  <p className="text-sm italic">Availability check form goes here...</p>
+                  <p className="mb-2 text-gray-800">{message.text}</p>
+                  <p className="text-sm italic text-gray-600">Availability check form goes here...</p>
                  </div>
               ) : (
-                <p>{message.text}</p>
+                <p className="text-gray-800">{message.text}</p>
               )}
               <span className={`block mt-1 text-xs 
-                ${message.type === 'user' ? 'text-primary-black/70' : 'text-secondary-gold/70'}
+                ${message.type === 'user' ? 'text-primary-black/70' : 'text-gray-600'}
               `}>
                 {formatTime(message.timestamp)}
               </span>
@@ -366,9 +364,9 @@ export default function ChatBot() {
         ))}
         {isTyping && (
            <div className="flex justify-start">
-             <div className="max-w-[70%] p-3 rounded-lg bg-gray-700 text-secondary-gold">
+             <div className="max-w-[70%] p-3 rounded-lg bg-gray-200 text-gray-800">
                <div className="flex items-center">
-                 <Loader2 className="h-4 w-4 animate-spin mr-2" />
+                 <Loader2 className="h-4 w-4 animate-spin mr-2 text-primary-gold" />
                  <span>Typing...</span>
                </div>
              </div>
@@ -379,7 +377,7 @@ export default function ChatBot() {
 
       {/* Quick Replies */}
       {!isTyping && messages.length <= 1 && (
-        <div className="p-4 border-t border-secondary-gold flex flex-wrap gap-2">
+        <div className="p-4 border-t border-gray-300 flex flex-wrap gap-2">
           {quickReplies.map((reply, index) => (
             <Button 
               key={index} 
@@ -395,9 +393,9 @@ export default function ChatBot() {
       )}
 
       {/* Chat Input Area */}
-      <div className="p-4 border-t border-secondary-gold flex items-center space-x-2">
+      <div className="p-4 border-t border-gray-300 flex items-center space-x-2">
         <Input
-          className="flex-1 bg-gray-700 text-secondary-gold border-gray-600 focus-visible:ring-primary-gold"
+          className="flex-1 bg-white text-gray-800 border-gray-300 focus-visible:ring-primary-gold"
           placeholder="Type a message..."
           value={inputValue}
           onChange={(e) => setInputValue(e.target.value)}

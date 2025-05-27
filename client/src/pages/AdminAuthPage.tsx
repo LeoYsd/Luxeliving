@@ -68,7 +68,7 @@ export default function AdminAuthPage() {
     try {
       const user = await login(data.username, data.password);
       if (user && user.isAdmin) {
-        window.location.href = "/admin";
+        navigate("/admin");
       } else {
         // If user is not an admin, log them out and show error
         await logout();
@@ -92,7 +92,7 @@ export default function AdminAuthPage() {
         true // Set isAdmin to true for admin registration
       );
       if (user && user.isAdmin) {
-        window.location.href = "/admin";
+        navigate("/admin");
       }
     } catch (error) {
       console.error("Registration error:", error);
