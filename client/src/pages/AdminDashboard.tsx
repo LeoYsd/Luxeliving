@@ -33,7 +33,7 @@ export default function AdminDashboard() {
 
   const handleLogout = async () => {
     await logout();
-    navigate("/auth");
+    navigate("/admin/auth");
   };
 
   const handleAddProperty = () => {

@@ -12,10 +12,15 @@ import {
   BarChart, Bar, Legend
 } from "recharts";
 import { AgentStats, Booking, Lead } from "@shared/schema";
+import { Button } from "@/components/ui/button";
+import { useAuth } from "@/hooks/use-auth";
+import { useLocation } from "wouter";
 
 export default function AgentDashboard() {
   const { isChatOpen } = useContext(ChatContext);
   const [timePeriod, setTimePeriod] = useState("month");
+  const { logout } = useAuth();
+  const [, navigate] = useLocation();
 
   const { data: agentStats, isLoading: statsLoading } = useQuery<AgentStats>({
     queryKey: ["/api/agent/stats"],
@@ -248,32 +253,26 @@ export default function AgentDashboard() {
                     <TableHeader>
                       <TableRow>
                         <TableHead>Client</TableHead>
+                        <TableHead>Contact</TableHead>
+                        <TableHead>Check-in</TableHead>
+                        <TableHead>Check-out</TableHead>
                         <TableHead>Property</TableHead>
-                        <TableHead>Dates</TableHead>
+                        <TableHead>Status</TableHead>
                         <TableHead>Amount</TableHead>
                         <TableHead>Commission</TableHead>
-                        <TableHead>Status</TableHead>
                       </TableRow>
                     </TableHeader>
                     <TableBody>
                       {bookings.map((booking) => (
                         <TableRow key={booking.id}>
                           <TableCell className="font-medium">{booking.clientName}</TableCell>
+                          <TableCell>{booking.clientEmail}</TableCell>
+                          <TableCell>{new Date(booking.checkIn).toLocaleDateString()}</TableCell>
+                          <TableCell>{new Date(booking.checkOut).toLocaleDateString()}</TableCell>
                           <TableCell>{booking.propertyName}</TableCell>
-                          <TableCell>
-                            {new Date(booking.checkIn).toLocaleDateString()} - {new Date(booking.checkOut).toLocaleDateString()}
-                          </TableCell>
-                          <TableCell>₦{booking.totalAmount.toLocaleString()}</TableCell>
-                          <TableCell>₦{booking.commission.toLocaleString()}</TableCell>
-                          <TableCell>
-                            <span className={`px-2 py-1 rounded-full text-xs font-medium ${
-                              booking.status === 'Confirmed' ? 'bg-green-100 text-green-800' :
-                              booking.status === 'Pending' ? 'bg-yellow-100 text-yellow-800' : 
-                              'bg-red-100 text-red-800'
-                            }`}>
-                              {booking.status}
-                            </span>
-                          </TableCell>
+                          <TableCell>{booking.status}</TableCell>
+                          <TableCell>₦{(booking.totalAmount || 0).toLocaleString()}</TableCell>
+                          <TableCell>₦{(booking.commission || 0).toLocaleString()}</TableCell>
                         </TableRow>
                       ))}
                     </TableBody>
@@ -313,6 +312,16 @@ export default function AgentDashboard() {
             </Card>
           </TabsContent>
         </Tabs>
+
+        {/* Logout Button */}
+        <div className="mt-8 flex justify-center">
+          <Button onClick={async () => {
+            await logout();
+            navigate("/agent/auth");
+          }}>
+            Logout
+          </Button>
+        </div>
       </div>
 
       {/* ChatBot */}
